@@ -1,0 +1,21 @@
+import Foundation
+
+final class RegistrationViewModel: ObservableObject {
+    @Published var email = ""
+    @Published var fullName = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
+    
+}
+
+// MARK: - AuthenticationFormProtocol
+extension RegistrationViewModel: ValidationFormProtocol {
+    var formIsValid: Bool {
+        !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+        && confirmPassword == password
+        && !fullName.isEmpty
+    }
+}
